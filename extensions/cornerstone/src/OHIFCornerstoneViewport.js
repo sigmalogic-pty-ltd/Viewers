@@ -236,9 +236,11 @@ function OHIFCornerstoneViewport({
         isOverlayVisible={true}
         loadingIndicatorComponent={ViewportLoadingIndicator}
         viewportOverlayComponent={props => {
+          const image = displaySet.images && displaySet.images[viewportIndex];
+          const viewportProps = { ...props, cine, isPlaying, frameRate, image };
           return (
             <ViewportOverlay
-              {...props}
+              {...viewportProps}
               activeTools={ToolBarService.getActiveTools()}
             />
           );

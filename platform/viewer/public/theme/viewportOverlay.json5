@@ -1,3 +1,37 @@
 {
-  // Examples of how to have extended viewport overlays
+  ViewportOverlay: {
+    topLeft: [
+    ],
+    topRight: [
+        {
+          id: 'PatientName',
+          title: 'PN:',
+          condition: {configOperation: 'safe', value: "image && image.PatientName && image.PatientName.Alphabetic"},
+          value: { configOperation: 'safe', value: "image.PatientName.Alphabetic" },
+        },
+        {
+          id: 'AccessionNumber',
+          title: 'Acc#',
+          value: { configOperation: 'safe', value: "image && image.AccessionNumber" },
+        },
+        {
+          id: 'PID',
+          title: 'PID#',
+          value: { configOperation: 'safe', value: "image && image.PatientID" },
+        },
+        {
+          id: 'OtherPid',
+          title: 'Other PID:',
+          condition: { configOperation: 'safe', value: "image && image.OtherPatientIDs"},
+          value: { configOperation: 'safe', value: "image && image.OtherPatientIDs" },
+        },
+        {
+          id: 'Species',
+          title: 'Species:',
+          condition: {configOperation: 'safe', value: "image && image.PatientSpeciesDescription"},
+          value: { configOperation: 'safe', value: "image.PatientSpeciesDescription + '/' + image.PatientBreedDescription" },
+        },
+
+    ],
+  },
 }

@@ -13,21 +13,14 @@ import ConfigPoint from 'config-point'
  */
 const generateFromConfig = (config) => {
   const { topLeft, topRight, bottomLeft, bottomRight, itemGenerator } = config;
-  console.log('generateFromConfig', config)
-  console.log('topLeft length', topLeft.length);
 
   return (props) => {
-    const {
-      imageId,
-      imageIndex,
-      stackSize,
-    } = props
+    const { imageId } = props;
     const topLeftClass = 'top-viewport left-viewport';
     const topRightClass = 'top-viewport right-viewport-scrollbar';
     const bottomRightClass = 'bottom-viewport right-viewport-scrollbar';
     const bottomLeftClass = 'bottom-viewport left-viewport';
     const overlay = 'absolute pointer-events-none';
-
 
     if (!imageId) {
       return null;
@@ -69,34 +62,50 @@ const { ViewportOverlay } = ConfigPoint.register({
     configBase: {
       topLeft: [
         {
-          id: 'AccessionNumber',
-          title: 'Acc#',
-          value: { configOperation: 'safe', value: "image.AccessionNumber" },
+          id: 'zoom',
+          title: 'Zoom:',
+          condition: props => props.activeTools && props.activeTools.includes("Zoom"),
+          value: props => props.scale && (props.scale.toFixed(2) + "x"),
+        },
+        {
+          id: 'wwwc',
+          condition: props => props.activeTools && props.activeTools.includes('Wwwc'),
+          contents: props => ([
+            { className: 'mr-1', value: "W:" },
+            { className: 'ml-1 mr-2 font-light', value: props.windowWidth.toFixed(0) },
+            { className: 'mr-1', value: "L:" },
+            { className: 'ml-1 font-light', value: props.windowCenter.toFixed(0) },
+          ]),
+        },
+        {
+          id: 'stackSize',
+          // An example of how to run this with a dynamic, safe function
+          condition: { configOperation: 'safe', value: 'stackSize > 1 && image' },
+          title: "I:",
+          value: props => `${props.image.InstanceNumber} (${props.imageIndex}/${props.stackSize})`,
         },
       ],
       topRight: [
-        {
-          id: 'trItem1',
-        },
-        {
-          id: 'trItem2',
-        },
       ],
       bottomLeft: [
-        {
-          id: 'blItem1',
-        },
       ],
       bottomRight: [
-        {
-          id: 'blItem2',
-        },
       ],
       itemGenerator: props => {
         const { item } = props;
+        const { title, value: valueFunc, condition, contents } = item;
+        if (condition && !condition(props)) return null;
+        if (!contents && !valueFunc) return null;
+        const value = valueFunc && valueFunc(props);
+        const contentsValue = contents && contents(props) ||
+          [
+            { className: "mr-1", value: title },
+            { classname: "mr-1 font-light", value }
+          ];
+
         return (
-          <div className="flex flex-row">
-            <span className="mr-1">Overlay {item.id}</span>
+          <div key={item.id} className="flex flex-row">
+            {contentsValue.map((content, idx) => (<span key={idx} className={content.className}>{content.value}</span>))}
           </div>
         );
       },
