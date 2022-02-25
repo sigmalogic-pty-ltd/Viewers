@@ -77,6 +77,8 @@ const { ViewportOverlay } = ConfigPoint.register({
             { className: 'ml-1 font-light', value: props.windowCenter.toFixed(0) },
           ]),
         },
+      ],
+      topRight: [
         {
           id: 'stackSize',
           // An example of how to run this with a dynamic, safe function
@@ -84,8 +86,6 @@ const { ViewportOverlay } = ConfigPoint.register({
           title: "I:",
           value: props => `${props.image.InstanceNumber} (${props.imageIndex}/${props.stackSize})`,
         },
-      ],
-      topRight: [
       ],
       bottomLeft: [
       ],
