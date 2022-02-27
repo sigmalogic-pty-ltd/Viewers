@@ -1,25 +1,7 @@
+/* eslint-disable prettier/prettier */
 window.config = {
   // default: '/'
   routerBasename: '/',
-  whiteLabeling: {
-    /* Optional: Should return a React component to be rendered in the "Logo" section of the application's Top Navigation bar */
-    createLogoComponentFn: function (React) {
-      return React.createElement('a', {
-        target: '_self',
-        rel: 'noopener noreferrer',
-        className: 'header-brand',
-        href: '/',
-        style: {
-          display: 'block',
-          textIndent: '-9999px',
-          background: 'url(/qubs-logo.svg)',
-          backgroundSize: 'contain',
-          backgroundRepeat: 'no-repeat',
-          width: '200px',
-        },
-      });
-    },
-  },
   extensions: [],
   showStudyList: true,
   filterQueryParam: false,
@@ -35,6 +17,7 @@ window.config = {
     includeActiveDisplaySet: true,
   },
   servers: {
+
     dicomWeb: [{
       name: 'DCM4CHEE',
       wadoUriRoot: 'https://server.dcmjs.org/dcm4chee-arc/aets/DCM4CHEE/wado',
@@ -66,17 +49,17 @@ window.config = {
     {
       commandName: 'rotateViewportCW',
       label: 'Rotate Right',
-      keys: ['r']
+      keys: ['r'],
     },
     {
       commandName: 'rotateViewportCCW',
       label: 'Rotate Left',
-      keys: ['l']
+      keys: ['l'],
     },
     {
       commandName: 'invertViewport',
       label: 'Invert',
-      keys: ['i']
+      keys: ['i'],
     },
     {
       commandName: 'flipViewportVertical',
@@ -91,33 +74,33 @@ window.config = {
     {
       commandName: 'scaleUpViewport',
       label: 'Zoom In',
-      keys: ['+']
+      keys: ['+'],
     },
     {
       commandName: 'scaleDownViewport',
       label: 'Zoom Out',
-      keys: ['-']
+      keys: ['-'],
     },
     {
       commandName: 'fitViewportToWindow',
       label: 'Zoom to Fit',
-      keys: ['=']
+      keys: ['='],
     },
     {
       commandName: 'resetViewport',
       label: 'Reset',
-      keys: ['space']
+      keys: ['space'],
     },
     // clearAnnotations
     {
       commandName: 'nextImage',
       label: 'Next Image',
-      keys: ['down']
+      keys: ['down'],
     },
     {
       commandName: 'previousImage',
       label: 'Previous Image',
-      keys: ['up']
+      keys: ['up'],
     },
     // firstImage
     // lastImage
@@ -135,7 +118,7 @@ window.config = {
     {
       commandName: 'setZoomTool',
       label: 'Zoom',
-      keys: ['z']
+      keys: ['z'],
     },
     // ~ Window level presets
     {
