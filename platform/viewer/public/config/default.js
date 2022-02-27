@@ -1,6 +1,25 @@
 window.config = {
   // default: '/'
   routerBasename: '/',
+  whiteLabeling: {
+    /* Optional: Should return a React component to be rendered in the "Logo" section of the application's Top Navigation bar */
+    createLogoComponentFn: function (React) {
+      return React.createElement('a', {
+        target: '_self',
+        rel: 'noopener noreferrer',
+        className: 'header-brand',
+        href: '/',
+        style: {
+          display: 'block',
+          textIndent: '-9999px',
+          background: 'url(/qubs-logo.svg)',
+          backgroundSize: 'contain',
+          backgroundRepeat: 'no-repeat',
+          width: '200px',
+        },
+      });
+    },
+  },
   extensions: [],
   showStudyList: true,
   filterQueryParam: false,
@@ -16,19 +35,17 @@ window.config = {
     includeActiveDisplaySet: true,
   },
   servers: {
-    dicomWeb: [
-      {
-        name: 'DCM4CHEE',
-        wadoUriRoot: 'https://server.dcmjs.org/dcm4chee-arc/aets/DCM4CHEE/wado',
-        qidoRoot: 'https://server.dcmjs.org/dcm4chee-arc/aets/DCM4CHEE/rs',
-        wadoRoot: 'https://server.dcmjs.org/dcm4chee-arc/aets/DCM4CHEE/rs',
-        qidoSupportsIncludeField: true,
-        imageRendering: 'wadors',
-        thumbnailRendering: 'wadors',
-        enableStudyLazyLoad: true,
-        supportsFuzzyMatching: true,
-      },
-    ],
+    dicomWeb: [{
+      name: 'DCM4CHEE',
+      wadoUriRoot: 'https://server.dcmjs.org/dcm4chee-arc/aets/DCM4CHEE/wado',
+      qidoRoot: 'https://server.dcmjs.org/dcm4chee-arc/aets/DCM4CHEE/rs',
+      wadoRoot: 'https://server.dcmjs.org/dcm4chee-arc/aets/DCM4CHEE/rs',
+      qidoSupportsIncludeField: true,
+      imageRendering: 'wadors',
+      thumbnailRendering: 'wadors',
+      enableStudyLazyLoad: true,
+      supportsFuzzyMatching: true,
+    }, ],
   },
   // Extensions should be able to suggest default values for these?
   // Or we can require that these be explicitly set
@@ -46,9 +63,21 @@ window.config = {
     },
     // Supported Keys: https://craig.is/killing/mice
     // ~ Cornerstone Extension
-    { commandName: 'rotateViewportCW', label: 'Rotate Right', keys: ['r'] },
-    { commandName: 'rotateViewportCCW', label: 'Rotate Left', keys: ['l'] },
-    { commandName: 'invertViewport', label: 'Invert', keys: ['i'] },
+    {
+      commandName: 'rotateViewportCW',
+      label: 'Rotate Right',
+      keys: ['r']
+    },
+    {
+      commandName: 'rotateViewportCCW',
+      label: 'Rotate Left',
+      keys: ['l']
+    },
+    {
+      commandName: 'invertViewport',
+      label: 'Invert',
+      keys: ['i']
+    },
     {
       commandName: 'flipViewportVertical',
       label: 'Flip Horizontally',
@@ -59,13 +88,37 @@ window.config = {
       label: 'Flip Vertically',
       keys: ['v'],
     },
-    { commandName: 'scaleUpViewport', label: 'Zoom In', keys: ['+'] },
-    { commandName: 'scaleDownViewport', label: 'Zoom Out', keys: ['-'] },
-    { commandName: 'fitViewportToWindow', label: 'Zoom to Fit', keys: ['='] },
-    { commandName: 'resetViewport', label: 'Reset', keys: ['space'] },
+    {
+      commandName: 'scaleUpViewport',
+      label: 'Zoom In',
+      keys: ['+']
+    },
+    {
+      commandName: 'scaleDownViewport',
+      label: 'Zoom Out',
+      keys: ['-']
+    },
+    {
+      commandName: 'fitViewportToWindow',
+      label: 'Zoom to Fit',
+      keys: ['=']
+    },
+    {
+      commandName: 'resetViewport',
+      label: 'Reset',
+      keys: ['space']
+    },
     // clearAnnotations
-    { commandName: 'nextImage', label: 'Next Image', keys: ['down'] },
-    { commandName: 'previousImage', label: 'Previous Image', keys: ['up'] },
+    {
+      commandName: 'nextImage',
+      label: 'Next Image',
+      keys: ['down']
+    },
+    {
+      commandName: 'previousImage',
+      label: 'Previous Image',
+      keys: ['up']
+    },
     // firstImage
     // lastImage
     {
@@ -79,7 +132,11 @@ window.config = {
       keys: ['pageup'],
     },
     // ~ Cornerstone Tools
-    { commandName: 'setZoomTool', label: 'Zoom', keys: ['z'] },
+    {
+      commandName: 'setZoomTool',
+      label: 'Zoom',
+      keys: ['z']
+    },
     // ~ Window level presets
     {
       commandName: 'windowLevelPreset1',
